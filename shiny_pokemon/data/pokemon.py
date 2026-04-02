@@ -1,0 +1,172 @@
+"""Pokemon species data relevant to shiny hunting in FR/LG."""
+
+
+class Pokemon:
+    """A Pokemon species with data relevant to shiny hunting.
+
+    Attributes:
+        name: Species name.
+        national_dex: National Pokedex number.
+        catch_rate: Base catch rate (0-255). Higher = easier to catch.
+        flees: True if the Pokemon always flees on turn 1 (Abra).
+    """
+
+    def __init__(
+        self, name: str, national_dex: int, catch_rate: int, flees: bool = False
+    ) -> None:
+        self.name = name
+        self.national_dex = national_dex
+        self.catch_rate = catch_rate
+        self.flees = flees
+
+    def __repr__(self) -> str:
+        return f"Pokemon(name={self.name!r}, dex={self.national_dex}, catch={self.catch_rate})"
+
+
+# Every species encounterable in Fire Red / Leaf Green.
+# catch_rate sourced from Bulbapedia; flees=True only for Abra.
+POKEMON: dict[str, Pokemon] = {
+    # --- Starters ---
+    "Bulbasaur": Pokemon("Bulbasaur", 1, 45),
+    "Ivysaur": Pokemon("Ivysaur", 2, 45),
+    "Venusaur": Pokemon("Venusaur", 3, 45),
+    "Charmander": Pokemon("Charmander", 4, 45),
+    "Charmeleon": Pokemon("Charmeleon", 5, 45),
+    "Charizard": Pokemon("Charizard", 6, 45),
+    "Squirtle": Pokemon("Squirtle", 7, 45),
+    "Wartortle": Pokemon("Wartortle", 8, 45),
+    "Blastoise": Pokemon("Blastoise", 9, 45),
+    # --- Route Pokemon ---
+    "Caterpie": Pokemon("Caterpie", 10, 255),
+    "Metapod": Pokemon("Metapod", 11, 120),
+    "Butterfree": Pokemon("Butterfree", 12, 45),
+    "Weedle": Pokemon("Weedle", 13, 255),
+    "Kakuna": Pokemon("Kakuna", 14, 120),
+    "Beedrill": Pokemon("Beedrill", 15, 45),
+    "Pidgey": Pokemon("Pidgey", 16, 255),
+    "Pidgeotto": Pokemon("Pidgeotto", 17, 120),
+    "Pidgeot": Pokemon("Pidgeot", 18, 45),
+    "Rattata": Pokemon("Rattata", 19, 255),
+    "Raticate": Pokemon("Raticate", 20, 127),
+    "Spearow": Pokemon("Spearow", 21, 255),
+    "Fearow": Pokemon("Fearow", 22, 90),
+    "Ekans": Pokemon("Ekans", 23, 255),
+    "Arbok": Pokemon("Arbok", 24, 90),
+    "Pikachu": Pokemon("Pikachu", 25, 190),
+    "Raichu": Pokemon("Raichu", 26, 75),
+    "Sandshrew": Pokemon("Sandshrew", 27, 255),
+    "Sandslash": Pokemon("Sandslash", 28, 90),
+    "Nidoran F": Pokemon("Nidoran F", 29, 235),
+    "Nidorina": Pokemon("Nidorina", 30, 120),
+    "Nidoqueen": Pokemon("Nidoqueen", 31, 45),
+    "Nidoran M": Pokemon("Nidoran M", 32, 235),
+    "Nidorino": Pokemon("Nidorino", 33, 120),
+    "Nidoking": Pokemon("Nidoking", 34, 45),
+    "Clefairy": Pokemon("Clefairy", 35, 150),
+    "Vulpix": Pokemon("Vulpix", 37, 190),
+    "Ninetales": Pokemon("Ninetales", 38, 75),
+    "Jigglypuff": Pokemon("Jigglypuff", 39, 170),
+    "Zubat": Pokemon("Zubat", 41, 255),
+    "Golbat": Pokemon("Golbat", 42, 90),
+    "Oddish": Pokemon("Oddish", 43, 255),
+    "Gloom": Pokemon("Gloom", 44, 120),
+    "Paras": Pokemon("Paras", 46, 190),
+    "Parasect": Pokemon("Parasect", 47, 75),
+    "Venonat": Pokemon("Venonat", 48, 190),
+    "Venomoth": Pokemon("Venomoth", 49, 75),
+    "Diglett": Pokemon("Diglett", 50, 255),
+    "Dugtrio": Pokemon("Dugtrio", 51, 50),
+    "Meowth": Pokemon("Meowth", 52, 255),
+    "Persian": Pokemon("Persian", 53, 90),
+    "Psyduck": Pokemon("Psyduck", 54, 190),
+    "Golduck": Pokemon("Golduck", 55, 75),
+    "Mankey": Pokemon("Mankey", 56, 190),
+    "Primeape": Pokemon("Primeape", 57, 75),
+    "Growlithe": Pokemon("Growlithe", 58, 190),
+    "Arcanine": Pokemon("Arcanine", 59, 75),
+    "Poliwag": Pokemon("Poliwag", 60, 255),
+    "Poliwhirl": Pokemon("Poliwhirl", 61, 120),
+    "Abra": Pokemon("Abra", 63, 200, flees=True),
+    "Kadabra": Pokemon("Kadabra", 64, 100),
+    "Machop": Pokemon("Machop", 66, 180),
+    "Machoke": Pokemon("Machoke", 67, 90),
+    "Bellsprout": Pokemon("Bellsprout", 69, 255),
+    "Weepinbell": Pokemon("Weepinbell", 70, 120),
+    "Tentacool": Pokemon("Tentacool", 72, 190),
+    "Tentacruel": Pokemon("Tentacruel", 73, 60),
+    "Geodude": Pokemon("Geodude", 74, 255),
+    "Graveler": Pokemon("Graveler", 75, 120),
+    "Ponyta": Pokemon("Ponyta", 77, 190),
+    "Rapidash": Pokemon("Rapidash", 78, 60),
+    "Slowpoke": Pokemon("Slowpoke", 79, 190),
+    "Slowbro": Pokemon("Slowbro", 80, 75),
+    "Magnemite": Pokemon("Magnemite", 81, 190),
+    "Magneton": Pokemon("Magneton", 82, 60),
+    "Farfetchd": Pokemon("Farfetchd", 83, 45),
+    "Doduo": Pokemon("Doduo", 84, 190),
+    "Dodrio": Pokemon("Dodrio", 85, 45),
+    "Seel": Pokemon("Seel", 86, 190),
+    "Dewgong": Pokemon("Dewgong", 87, 75),
+    "Grimer": Pokemon("Grimer", 88, 190),
+    "Muk": Pokemon("Muk", 89, 75),
+    "Shellder": Pokemon("Shellder", 90, 190),
+    "Gastly": Pokemon("Gastly", 92, 190),
+    "Haunter": Pokemon("Haunter", 93, 90),
+    "Onix": Pokemon("Onix", 95, 45),
+    "Drowzee": Pokemon("Drowzee", 96, 190),
+    "Hypno": Pokemon("Hypno", 97, 75),
+    "Krabby": Pokemon("Krabby", 98, 225),
+    "Kingler": Pokemon("Kingler", 99, 60),
+    "Voltorb": Pokemon("Voltorb", 100, 190),
+    "Electrode": Pokemon("Electrode", 101, 60),
+    "Exeggcute": Pokemon("Exeggcute", 102, 90),
+    "Cubone": Pokemon("Cubone", 104, 190),
+    "Marowak": Pokemon("Marowak", 105, 75),
+    "Hitmonlee": Pokemon("Hitmonlee", 106, 45),
+    "Hitmonchan": Pokemon("Hitmonchan", 107, 45),
+    "Lickitung": Pokemon("Lickitung", 108, 45),
+    "Koffing": Pokemon("Koffing", 109, 190),
+    "Weezing": Pokemon("Weezing", 110, 60),
+    "Rhyhorn": Pokemon("Rhyhorn", 111, 120),
+    "Rhydon": Pokemon("Rhydon", 112, 60),
+    "Chansey": Pokemon("Chansey", 113, 30),
+    "Tangela": Pokemon("Tangela", 114, 45),
+    "Kangaskhan": Pokemon("Kangaskhan", 115, 45),
+    "Horsea": Pokemon("Horsea", 116, 225),
+    "Seadra": Pokemon("Seadra", 117, 75),
+    "Goldeen": Pokemon("Goldeen", 118, 225),
+    "Seaking": Pokemon("Seaking", 119, 60),
+    "Staryu": Pokemon("Staryu", 120, 225),
+    "Starmie": Pokemon("Starmie", 121, 60),
+    "Mr. Mime": Pokemon("Mr. Mime", 122, 45),
+    "Scyther": Pokemon("Scyther", 123, 45),
+    "Jynx": Pokemon("Jynx", 124, 45),
+    "Electabuzz": Pokemon("Electabuzz", 125, 45),
+    "Magmar": Pokemon("Magmar", 126, 45),
+    "Pinsir": Pokemon("Pinsir", 127, 45),
+    "Tauros": Pokemon("Tauros", 128, 45),
+    "Magikarp": Pokemon("Magikarp", 129, 255),
+    "Gyarados": Pokemon("Gyarados", 130, 45),
+    "Lapras": Pokemon("Lapras", 131, 45),
+    "Ditto": Pokemon("Ditto", 132, 35),
+    "Eevee": Pokemon("Eevee", 133, 45),
+    "Porygon": Pokemon("Porygon", 137, 45),
+    "Omanyte": Pokemon("Omanyte", 138, 45),
+    "Kabuto": Pokemon("Kabuto", 140, 45),
+    "Aerodactyl": Pokemon("Aerodactyl", 142, 45),
+    "Snorlax": Pokemon("Snorlax", 143, 25),
+    "Articuno": Pokemon("Articuno", 144, 3),
+    "Zapdos": Pokemon("Zapdos", 145, 3),
+    "Moltres": Pokemon("Moltres", 146, 3),
+    "Dratini": Pokemon("Dratini", 147, 45),
+    "Dragonair": Pokemon("Dragonair", 148, 45),
+    "Mewtwo": Pokemon("Mewtwo", 150, 3),
+    # --- Roaming beasts ---
+    "Raikou": Pokemon("Raikou", 243, 3),
+    "Entei": Pokemon("Entei", 244, 3),
+    "Suicune": Pokemon("Suicune", 245, 3),
+    # --- Event legendaries ---
+    "Lugia": Pokemon("Lugia", 249, 3),
+    "Ho-Oh": Pokemon("Ho-Oh", 250, 3),
+    "Deoxys": Pokemon("Deoxys", 386, 3),
+}
