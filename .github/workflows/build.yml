@@ -1,4 +1,4 @@
-name: Build Windows exe
+name: Build release
 
 on:
   push:
@@ -7,7 +7,21 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            name: ShinyPokemonCalculator-Windows.exe
+            separator: ";"
+          - os: macos-latest
+            name: ShinyPokemonCalculator-Mac
+            separator: ":"
+          - os: ubuntu-latest
+            name: ShinyPokemonCalculator-Linux
+            separator: ":"
+
+    runs-on: ${{ matrix.os }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -21,18 +35,27 @@ jobs:
           uv sync
           uv add --dev pyinstaller
 
-      - name: Build exe
+      - name: Build
         run: |
-          uv run pyinstaller --onefile --windowed --name ShinyPokemonCalculator --add-data "shiny_pokemon/data;shiny_pokemon/data" shiny_pokemon/gui/app.py
+          uv run pyinstaller --onefile --windowed --name ${{ matrix.name }} --add-data "shiny_pokemon/data${{ matrix.separator }}shiny_pokemon/data" shiny_pokemon/gui/app.py
 
-      - name: Upload exe
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ShinyPokemonCalculator
-          path: dist/ShinyPokemonCalculator.exe
+          name: ${{ matrix.name }}
+          path: dist/${{ matrix.name }}*
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/ShinyPokemonCalculator.exe
+          files: artifacts/**/*
           generate_release_notes: true
