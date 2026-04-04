@@ -46,8 +46,10 @@ Requires Python 3.13+.
 git clone https://github.com/wermusam/shiny_pokemon.git
 cd shiny_pokemon
 
-# Install dependencies
+# Install uv (Python package manager)
 pip install uv
+
+# Install the app and all dependencies
 uv sync
 
 # Run the app
@@ -59,6 +61,8 @@ uv run shiny-gui
 ```bash
 uv run pytest tests/ -v
 ```
+
+All 63 tests should pass.
 
 ## How the math works
 

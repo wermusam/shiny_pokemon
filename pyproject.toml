@@ -17,3 +17,12 @@ shiny-cli = "shiny_pokemon.cli:main"
 
 [project.gui-scripts]
 shiny-gui = "shiny_pokemon.gui.app:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pyinstaller>=6.19.0",
+]
