@@ -27,7 +27,15 @@ A desktop app that calculates your odds of finding a shiny Pokemon in Fire Red a
 
 ## Download
 
-Go to the [Releases](https://github.com/wermusam/shiny_pokemon/releases) page and download `ShinyPokemonCalculator.exe`. No installation needed, just run it.
+Go to the [Releases](https://github.com/wermusam/shiny_pokemon/releases) page and download the file for your system:
+
+| Your computer | Download this file | How to run it |
+|---|---|---|
+| Windows | `ShinyPokemonCalculator-Windows.exe` | Double-click it |
+| Mac | `ShinyPokemonCalculator-Mac` | Open Terminal, run `chmod +x ShinyPokemonCalculator-Mac` then `./ShinyPokemonCalculator-Mac` |
+| Linux | `ShinyPokemonCalculator-Linux` | Open Terminal, run `chmod +x ShinyPokemonCalculator-Linux` then `./ShinyPokemonCalculator-Linux` |
+
+No installation or Python needed. Just download and run.
 
 ## Run from source
 
