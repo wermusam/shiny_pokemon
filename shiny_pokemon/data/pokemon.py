@@ -161,6 +161,8 @@ POKEMON: dict[str, Pokemon] = {
     "Dratini": Pokemon("Dratini", 147, 45),
     "Dragonair": Pokemon("Dragonair", 148, 45),
     "Mewtwo": Pokemon("Mewtwo", 150, 3),
+    # --- Gen 2 Pokemon found in Cerulean Cave ---
+    "Wobbuffet": Pokemon("Wobbuffet", 202, 45),
     # --- Roaming beasts ---
     "Raikou": Pokemon("Raikou", 243, 3),
     "Entei": Pokemon("Entei", 244, 3),

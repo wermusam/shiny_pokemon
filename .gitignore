@@ -14,3 +14,8 @@ wheels/
 
 # Temp chart files
 shiny_chart.html
+_test_chart.html
+
+# Editor / tool config
+.vscode/
+.claude/

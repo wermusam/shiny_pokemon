@@ -48,17 +48,16 @@ def analytical_chart_html(
     encounters = list(range(0, max_encounters + 1, step))
     probabilities = [game.cumulative_probability(n) * 100 for n in encounters]
 
-    # Only show a few milestones to avoid overlap
-    milestones = [50, 90]
-    m_x = []
-    m_y = []
-    m_text = []
+    # Milestone dots with labels
+    milestones = [25, 50, 75, 90, 99]
+
+    m_x, m_y, m_text = [], [], []
     for pct in milestones:
         n = game.resets_for_probability(pct / 100)
         if n <= max_encounters:
             m_x.append(n)
             m_y.append(pct)
-            m_text.append(f"{pct}% chance after {n:,} tries")
+            m_text.append(f"{pct}% after {n:,} tries")
 
     fig = go.Figure()
 
@@ -71,22 +70,42 @@ def analytical_chart_html(
         hovertemplate="After %{x:,} tries<br>You have a %{y:.1f}% chance<extra></extra>",
     ))
 
-    fig.add_trace(go.Scatter(
-        x=m_x,
-        y=m_y,
-        mode="markers+text",
-        name="Key milestones",
-        text=m_text,
-        textposition="bottom right",
-        textfont=dict(size=11, color="white"),
-        marker=dict(size=10, color="#FF6B6B"),
-        hovertemplate="%{text}<extra></extra>",
-    ))
+    # Red dots
+    if m_x:
+        fig.add_trace(go.Scatter(
+            x=m_x, y=m_y,
+            mode="markers",
+            name="Key milestones",
+            marker=dict(size=10, color="#FF6B6B"),
+            hovertemplate="%{text}<extra></extra>",
+            text=m_text,
+        ))
+
+    # Plain text labels offset by pixels — no arrows, no boxes
+    # All labels go below-right of their dot
+    for pct in milestones:
+        n = game.resets_for_probability(pct / 100)
+        if n <= max_encounters:
+            fig.add_annotation(
+                x=n, y=pct,
+                text=f"{pct}% after {n:,} tries",
+                showarrow=False,
+                xshift=8, yshift=-12,
+                font=dict(size=11, color="white"),
+                xanchor="left",
+                yanchor="top",
+            )
+
+    # Handle "Any Pokemon" so it reads naturally
+    if target_name == "Any Pokemon":
+        title_text = "How likely am I to find any Shiny Pokemon?"
+    else:
+        title_text = f"How likely am I to find a Shiny {target_name}?"
 
     fig.update_layout(
         title=dict(
             text=(
-                f"How likely am I to find a Shiny {target_name}?"
+                f"{title_text}"
                 f"<br><sub>Each try has a 1 in {effective_odds:,} chance "
                 f"({game_name})</sub>"
             ),
@@ -136,39 +155,59 @@ def simulation_histogram_html(
         name="Simulated hunters",
         marker_color="#4ECDC4",
         opacity=0.8,
-        hovertemplate="Took %{x:,} tries<br>%{y} hunters<extra></extra>",
+        hovertemplate="Took %{x:,.0f} tries<br>%{y} hunters<extra></extra>",
     ))
 
     # Two reference lines — the math answer vs the simulation answer
     # These should be close but not identical. That's Monte Carlo!
+    # Put labels at different heights so they don't overlap when lines are close
     fig.add_vline(
         x=analytical_mean, line_dash="dash", line_color="#FFD700", line_width=2,
-        annotation_text=f"Math says: {analytical_mean:,.0f}",
-        annotation_position="top right",
-        annotation_font_color="#FFD700",
-        annotation_font_size=12,
     )
     fig.add_vline(
         x=sim_mean, line_dash="solid", line_color="#FF6B6B", line_width=2,
-        annotation_text=f"Simulation got: {sim_mean:,.0f}",
-        annotation_position="top left",
-        annotation_font_color="#FF6B6B",
-        annotation_font_size=12,
+    )
+
+    # Place labels at different heights and sides so they never collide
+    # with each other or the title/subtitle
+    fig.add_annotation(
+        x=analytical_mean, y=0.55, yref="paper",
+        text=f"<b>Math: {analytical_mean:,.0f}</b>",
+        showarrow=True, arrowhead=2, arrowcolor="#FFD700",
+        ax=50, ay=0,
+        font=dict(color="#FFD700", size=12),
+        bgcolor="rgba(30,30,30,0.85)",
+        borderpad=4,
+    )
+    fig.add_annotation(
+        x=sim_mean, y=0.35, yref="paper",
+        text=f"<b>Sim: {sim_mean:,.0f}</b>",
+        showarrow=True, arrowhead=2, arrowcolor="#FF6B6B",
+        ax=-50, ay=0,
+        font=dict(color="#FF6B6B", size=12),
+        bgcolor="rgba(30,30,30,0.85)",
+        borderpad=4,
     )
 
     # How close did the simulation get to the math?
     diff_pct = abs(sim_mean - analytical_mean) / analytical_mean * 100
     if diff_pct < 2:
-        accuracy_msg = f"Simulation is within {diff_pct:.1f}% of the math. Very close!"
+        accuracy_msg = f"Simulation landed within {diff_pct:.1f}% of the math. Very close!"
     elif diff_pct < 5:
-        accuracy_msg = f"Simulation is {diff_pct:.1f}% off from the math. Pretty good!"
+        accuracy_msg = f"Simulation landed {diff_pct:.1f}% away from the math. Pretty typical!"
     else:
-        accuracy_msg = f"Simulation is {diff_pct:.1f}% off. Try more hunters for better accuracy"
+        accuracy_msg = f"Simulation landed {diff_pct:.1f}% away. Try more hunters for a tighter result"
+
+    # Handle "Any Pokemon" so it reads naturally
+    if target_name == "Any Pokemon":
+        sim_title = f"What if {len(attempts):,} people all hunted for any Shiny Pokemon?"
+    else:
+        sim_title = f"What if {len(attempts):,} people all hunted Shiny {target_name}?"
 
     fig.update_layout(
         title=dict(
             text=(
-                f"What if {len(attempts):,} people all hunted Shiny {target_name}?"
+                f"{sim_title}"
                 f"<br><sub>{accuracy_msg}</sub>"
             ),
             x=0.5,
@@ -178,7 +217,7 @@ def simulation_histogram_html(
         yaxis_title="How many hunters",
         template="plotly_dark",
         showlegend=False,
-        margin=dict(l=60, r=30, t=85, b=50),
+        margin=dict(l=60, r=30, t=100, b=50),
     )
 
     return _make_responsive(fig)

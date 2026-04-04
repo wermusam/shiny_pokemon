@@ -69,11 +69,26 @@ def apply_dark_theme(app: QApplication) -> None:
             padding: 4px 8px;
             min-height: 24px;
         }
-        QSpinBox {
+        QComboBox QAbstractItemView {
+            background-color: #3c3c3c;
+            color: #ffffff;
+            selection-background-color: #FFD700;
+            selection-color: #000000;
+            border: 1px solid #555;
+        }
+        QSpinBox, QDoubleSpinBox {
             background-color: #3c3c3c;
             border: 1px solid #555;
             border-radius: 4px;
             padding: 4px 8px;
+            color: #ffffff;
+        }
+        QLineEdit {
+            background-color: #3c3c3c;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 4px 8px;
+            color: #ffffff;
         }
         QTableWidget {
             gridline-color: #555;
@@ -97,6 +112,13 @@ def apply_dark_theme(app: QApplication) -> None:
         }
         QStatusBar {
             color: #aaa;
+        }
+        QMessageBox {
+            background-color: #2b2b2b;
+            color: #ffffff;
+        }
+        QMessageBox QLabel {
+            color: #ffffff;
         }
     """)
 
