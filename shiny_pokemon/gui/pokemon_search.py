@@ -264,7 +264,7 @@ def build_pokemon_location_index():
                 for entry in index[name]:
                     if (entry["location"] == route_name
                             and entry["rate"] == slot.rate
-                            and entry["levels"] == f"{slot.level_min}-{slot.level_max}"):
+                            and entry["levels"] == (str(slot.level_min) if slot.level_min == slot.level_max else f"{slot.level_min}-{slot.level_max}")):
                         existing = entry
                         break
 
@@ -276,7 +276,7 @@ def build_pokemon_location_index():
                     index[name].append({
                         "location": route_name,
                         "rate": slot.rate,
-                        "levels": f"{slot.level_min}-{slot.level_max}",
+                        "levels": str(slot.level_min) if slot.level_min == slot.level_max else f"{slot.level_min}-{slot.level_max}",
                         "type": route.encounter_type.value,
                         "version": v,
                     })

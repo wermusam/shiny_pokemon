@@ -137,6 +137,46 @@ class TestSpecificRoutes:
         names = {s.pokemon_name for s in route.encounter_slots}
         assert "Dratini" in names
 
+    def test_sevii_islands_exist(self):
+        """Sevii Islands (post-game) locations should be present."""
+        for version in [FR, LG]:
+            routes = ENCOUNTER_TABLES[version]
+            assert "Kindle Road" in routes
+            assert "Berry Forest" in routes
+            assert "Icefall Cave 1F" in routes
+            assert "Lost Cave" in routes
+            assert "Pattern Bush" in routes
+            assert "Sevault Canyon" in routes
+            assert "Mt. Ember Exterior" in routes
+
+    def test_lost_cave_has_ghost_types(self):
+        """Lost Cave should have Gastly/Haunter."""
+        for version in [FR, LG]:
+            route = ENCOUNTER_TABLES[version]["Lost Cave"]
+            names = {s.pokemon_name for s in route.encounter_slots}
+            assert "Gastly" in names
+            assert "Haunter" in names
+
+    def test_tanoby_ruins_has_unown(self):
+        """Tanoby Ruins Monean Chamber should have Unown."""
+        for version in [FR, LG]:
+            route = ENCOUNTER_TABLES[version]["Tanoby Ruins Monean Chamber"]
+            names = {s.pokemon_name for s in route.encounter_slots}
+            assert names == {"Unown"}
+
+    def test_pattern_bush_has_heracross(self):
+        """Heracross is found in Pattern Bush in both versions."""
+        for version in [FR, LG]:
+            route = ENCOUNTER_TABLES[version]["Pattern Bush"]
+            names = {s.pokemon_name for s in route.encounter_slots}
+            assert "Heracross" in names
+
+    def test_kindle_road_has_ponyta(self):
+        """Ponyta is a common encounter on Kindle Road."""
+        route = ENCOUNTER_TABLES[FR]["Kindle Road"]
+        names = {s.pokemon_name for s in route.encounter_slots}
+        assert "Ponyta" in names
+
 
 class TestSoftResetPokemon:
     """Soft reset targets must be correctly categorized."""
@@ -185,9 +225,9 @@ class TestDataCompleteness:
 
     @pytest.mark.parametrize("version", [FR, LG])
     def test_minimum_location_count(self, version):
-        """We should have at least 100 locations (grass + surf + fishing)."""
+        """We should have at least 200 locations (grass + surf + fishing + Sevii)."""
         count = len(ENCOUNTER_TABLES[version])
-        assert count >= 100, f"Only {count} locations for {version.value}"
+        assert count >= 200, f"Only {count} locations for {version.value}"
 
     @pytest.mark.parametrize("version", [FR, LG])
     def test_has_surf_locations(self, version):

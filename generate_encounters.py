@@ -89,11 +89,47 @@ MAP_NAMES = {
     "MAP_FUCHSIA_CITY": "Fuchsia City",
     "MAP_CINNABAR_ISLAND": "Cinnabar Island",
     "MAP_SSANNE_EXTERIOR": "S.S. Anne",
+    # --- Sevii Islands (post-game) ---
+    "MAP_ONE_ISLAND": "One Island",
+    "MAP_ONE_ISLAND_KINDLE_ROAD": "Kindle Road",
+    "MAP_ONE_ISLAND_TREASURE_BEACH": "Treasure Beach",
+    "MAP_TWO_ISLAND_CAPE_BRINK": "Cape Brink",
+    "MAP_THREE_ISLAND_BERRY_FOREST": "Berry Forest",
+    "MAP_THREE_ISLAND_BOND_BRIDGE": "Bond Bridge",
+    "MAP_THREE_ISLAND_PORT": "Three Isle Port",
+    "MAP_FOUR_ISLAND": "Four Island",
+    "MAP_FOUR_ISLAND_ICEFALL_CAVE_ENTRANCE": "Icefall Cave Entrance",
+    "MAP_FOUR_ISLAND_ICEFALL_CAVE_1F": "Icefall Cave 1F",
+    "MAP_FOUR_ISLAND_ICEFALL_CAVE_B1F": "Icefall Cave B1F",
+    "MAP_FOUR_ISLAND_ICEFALL_CAVE_BACK": "Icefall Cave Back",
+    "MAP_FIVE_ISLAND": "Five Island",
+    "MAP_FIVE_ISLAND_LOST_CAVE_ROOM1": "Lost Cave",
+    "MAP_FIVE_ISLAND_MEADOW": "Five Isle Meadow",
+    "MAP_FIVE_ISLAND_MEMORIAL_PILLAR": "Memorial Pillar",
+    "MAP_FIVE_ISLAND_RESORT_GORGEOUS": "Resort Gorgeous",
+    "MAP_FIVE_ISLAND_WATER_LABYRINTH": "Water Labyrinth",
+    "MAP_SIX_ISLAND_GREEN_PATH": "Green Path",
+    "MAP_SIX_ISLAND_OUTCAST_ISLAND": "Outcast Island",
+    "MAP_SIX_ISLAND_PATTERN_BUSH": "Pattern Bush",
+    "MAP_SIX_ISLAND_RUIN_VALLEY": "Ruin Valley",
+    "MAP_SIX_ISLAND_WATER_PATH": "Water Path",
+    "MAP_SEVEN_ISLAND_SEVAULT_CANYON_ENTRANCE": "Sevault Canyon Entrance",
+    "MAP_SEVEN_ISLAND_SEVAULT_CANYON": "Sevault Canyon",
+    "MAP_SEVEN_ISLAND_TANOBY_RUINS": "Tanoby Ruins",
+    "MAP_SEVEN_ISLAND_TANOBY_RUINS_MONEAN_CHAMBER": "Tanoby Ruins Monean Chamber",
+    "MAP_SEVEN_ISLAND_TRAINER_TOWER": "Trainer Tower",
+    "MAP_MT_EMBER_EXTERIOR": "Mt. Ember Exterior",
+    "MAP_MT_EMBER_SUMMIT_PATH_1F": "Mt. Ember Summit 1F",
+    "MAP_MT_EMBER_SUMMIT_PATH_2F": "Mt. Ember Summit 2F",
+    "MAP_MT_EMBER_RUBY_PATH_1F": "Mt. Ember Ruby Path 1F",
+    "MAP_MT_EMBER_RUBY_PATH_B1F": "Mt. Ember Ruby Path B1F",
+    "MAP_MT_EMBER_RUBY_PATH_B2F": "Mt. Ember Ruby Path B2F",
+    "MAP_MT_EMBER_RUBY_PATH_B3F": "Mt. Ember Ruby Path B3F",
 }
 
 CAVE_KEYWORDS = [
     "Cave", "Moon", "Tunnel", "Tower", "Plant", "Mansion",
-    "Victory", "Seafoam",
+    "Victory", "Seafoam", "Ember", "Tanoby", "Canyon",
 ]
 
 
@@ -409,6 +445,22 @@ def main():
     lines.append('    "Aerodactyl": {')
     lines.append('        "location": "Cinnabar Island Lab (Old Amber)",')
     lines.append('        "category": "Fossil",')
+    lines.append("    },")
+    lines.append('    "Snorlax": {')
+    lines.append('        "location": "Route 12 / Route 16 (blocking the path)",')
+    lines.append('        "category": "Static",')
+    lines.append("    },")
+    lines.append('    "Lugia": {')
+    lines.append('        "location": "Navel Rock (MysticTicket event)",')
+    lines.append('        "category": "Event Legendary",')
+    lines.append("    },")
+    lines.append('    "Ho-Oh": {')
+    lines.append('        "location": "Navel Rock (MysticTicket event)",')
+    lines.append('        "category": "Event Legendary",')
+    lines.append("    },")
+    lines.append('    "Deoxys": {')
+    lines.append('        "location": "Birth Island (AuroraTicket event)",')
+    lines.append('        "category": "Event Legendary",')
     lines.append("    },")
     lines.append("}")
     lines.append("")

@@ -16,6 +16,9 @@ wheels/
 shiny_chart.html
 _test_chart.html
 
+# Build artifacts
+wild_encounters.json
+
 # Editor / tool config
 .vscode/
 .claude/
