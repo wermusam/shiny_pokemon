@@ -1,6 +1,6 @@
 [project]
 name = "shiny-pokemon"
-version = "1.0.0"
+version = "1.2.0"
 description = "Shiny Pokemon probability calculator for Fire Red and Leaf Green with Monte Carlo simulation"
 readme = "README.md"
 requires-python = ">=3.13"
