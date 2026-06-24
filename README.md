@@ -33,7 +33,6 @@ Go to the [Releases](https://github.com/wermusam/shiny_pokemon/releases) page an
 |---|---|---|
 | Windows | `ShinyPokemonCalculator-Windows.exe` | Double-click it |
 | Mac | `ShinyPokemonCalculator-Mac` | Open Terminal, run `chmod +x ShinyPokemonCalculator-Mac` then `./ShinyPokemonCalculator-Mac` |
-| Linux | `ShinyPokemonCalculator-Linux` | Open Terminal, run `chmod +x ShinyPokemonCalculator-Linux` then `./ShinyPokemonCalculator-Linux` |
 
 No installation or Python needed. Just download and run.
 
