@@ -16,11 +16,8 @@ jobs:
           - os: windows-latest
             name: ShinyPokemonCalculator-Windows.exe
             separator: ";"
-          - os: macos-latest
+          - os: macos-13
             name: ShinyPokemonCalculator-Mac
-            separator: ":"
-          - os: ubuntu-latest
-            name: ShinyPokemonCalculator-Linux
             separator: ":"
 
     runs-on: ${{ matrix.os }}

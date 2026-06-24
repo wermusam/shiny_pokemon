@@ -3,8 +3,12 @@
 Run with: uv run python -m shiny_pokemon.gui.app
 Or after install: shiny-gui
 """
-
+import os
 import sys
+# Packaged macOS build needs the QtWebEngine sandbox off or the charts render blank
+if sys.platform == "darwin" and getattr(sys, "frozen", False):
+    os.environ.setdefault("QTWEBENGINE_DISABLE_SANDBOX", "1")
+    
 from PySide6.QtWidgets import QApplication
 from PySide6.QtGui import QPalette, QColor
 from PySide6.QtCore import Qt
