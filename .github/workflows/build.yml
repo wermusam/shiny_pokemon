@@ -16,7 +16,7 @@ jobs:
           - os: windows-latest
             name: ShinyPokemonCalculator-Windows.exe
             separator: ";"
-          - os: macos-13
+          - os: macos-latest
             name: ShinyPokemonCalculator-Mac
             separator: ":"
 
