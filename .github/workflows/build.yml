@@ -12,13 +12,7 @@ jobs:
   build:
     strategy:
       matrix:
-        include:
-          - os: windows-latest
-            name: ShinyPokemonCalculator-Windows.exe
-            separator: ";"
-          - os: macos-latest
-            name: ShinyPokemonCalculator-Mac
-            separator: ":"
+        os: [windows-latest, macos-latest]
 
     runs-on: ${{ matrix.os }}
 
@@ -35,15 +29,32 @@ jobs:
           uv sync
           uv add --dev pyinstaller
 
-      - name: Build
+      # Windows: one single .exe (unchanged)
+      - name: Build (Windows)
+        if: runner.os == 'Windows'
         run: |
-          uv run pyinstaller --onefile --windowed --name ${{ matrix.name }} --add-data "shiny_pokemon/data${{ matrix.separator }}shiny_pokemon/data" shiny_pokemon/gui/app.py
+          uv run pyinstaller --onefile --windowed --name ShinyPokemonCalculator-Windows.exe --add-data "shiny_pokemon/data;shiny_pokemon/data" shiny_pokemon/gui/app.py
 
-      - name: Upload artifact
+      - name: Upload (Windows)
+        if: runner.os == 'Windows'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.name }}
-          path: dist/${{ matrix.name }}
+          name: ShinyPokemonCalculator-Windows.exe
+          path: dist/ShinyPokemonCalculator-Windows.exe
+
+      # macOS: a real double-clickable .app, zipped into one download
+      - name: Build (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          uv run pyinstaller --windowed --name ShinyPokemonCalculator-Mac --add-data "shiny_pokemon/data:shiny_pokemon/data" shiny_pokemon/gui/app.py
+          ditto -c -k --keepParent "dist/ShinyPokemonCalculator-Mac.app" "dist/ShinyPokemonCalculator-Mac.zip"
+
+      - name: Upload (macOS)
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ShinyPokemonCalculator-Mac.zip
+          path: dist/ShinyPokemonCalculator-Mac.zip
 
   release:
     needs: build
