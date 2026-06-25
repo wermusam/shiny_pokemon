@@ -32,7 +32,7 @@ Go to the [Releases](https://github.com/wermusam/shiny_pokemon/releases) page an
 | Your computer | Download this file | How to run it |
 |---|---|---|
 | Windows | `ShinyPokemonCalculator-Windows.exe` | Double-click it |
-| Mac | `ShinyPokemonCalculator-Mac` | Open Terminal, run `chmod +x ShinyPokemonCalculator-Mac` then `./ShinyPokemonCalculator-Mac` |
+| Mac | `ShinyPokemonCalculator-Mac.zip` | Double-click the zip to unzip it, then double-click the app. The first time, if macOS says it can't verify the app: open **System Settings → Privacy & Security**, scroll down, and click **Open Anyway**. |
 
 No installation or Python needed. Just download and run.
 
